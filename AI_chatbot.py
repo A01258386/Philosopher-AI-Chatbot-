@@ -21,3 +21,7 @@ corpus = article.text
 
 #Print the article
 print(corpus)
+
+#Tokenize the article
+text = corpus
+sentence_list = nltk.sent_tokenize(text) #convert to list of sentences
