@@ -43,4 +43,43 @@ def greeting_response(text):
     for word in text.splot():
         if word in user_greetings:
             return random.choice(bot_greetings) + '.'
-            
+
+#create index sort function descending,max at first index and other ascending
+def index_sort(list_var):
+    length = len(list_var)
+    list_index = list(range(0, length))
+
+    x = list_var
+    for i in range(length):
+        for j in range(length):
+            if x[list_index[i]] > x[list_index[j]]:
+                temp = list_index[i]
+                list_index[i] = list_index[j]
+                list_index[j] = temp
+    return list_index
+
+#Create the bot response
+def bot_response(text):
+    user_input = user_input.lower()
+    sentence_list.append(user_input)
+    bot_response = ''
+    cm = CountVectorizer().fit_transform(sentence_list)
+    similarity_scores = cosine_similarity(cm[-1], cm)
+    similarity_scores_list = similarity_scores.flatten() #flatten the list
+    index = index_sort(similarity_scores_list)
+    index = index[1:]
+    response_flag = 0
+
+    j = 0 #if we found 2 or less smilar sentences, we will use top 2
+    for i in range(len(index)):
+        if similarity_scores_list[index[i]] > 0.0:
+            response_flag = 1
+            bot_response = bot_response + sentence_list[index[i]]
+            j = j + 1
+        if j >= 2:
+            break
+    if response_flag == 0: #if there is no similar sentence
+        bot_response = bot_response + 'I am sorry, I don\'t understand you'
+
+    sentence_list.remove(user_input)
+    return bot_response
