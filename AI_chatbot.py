@@ -40,7 +40,7 @@ def greeting_response(text):
     # User Greetings
     user_greetings = ['hi', 'hello', 'hey', 'hola', 'greetings', 'sup', 'what\'s up', 'hey there', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'how are you', 'how\'s it going', 'how\'s it going?']
 
-    for word in text.splot():
+    for word in text.split():
         if word in user_greetings:
             return random.choice(bot_greetings) + '.'
 
@@ -59,7 +59,7 @@ def index_sort(list_var):
     return list_index
 
 #Create the bot response
-def bot_response(text):
+def bot_response(user_input):
     user_input = user_input.lower()
     sentence_list.append(user_input)
     bot_response = ''
@@ -78,8 +78,27 @@ def bot_response(text):
             j = j + 1
         if j >= 2:
             break
-    if response_flag == 0: #if there is no similar sentence
-        bot_response = bot_response + 'I am sorry, I don\'t understand you'
+    if response_flag == 0 and user_input.lower() in ['sadge', 'sadgebot', 'why','why not', 'understand me',':('] :
+        bot_response = bot_response +':('
+    elif response_flag == 0: #if there is no similar sentence
+        bot_response = bot_response + 'I am sorry, I am still a machine in the end of the universe'
+
 
     sentence_list.remove(user_input)
     return bot_response
+
+#Start the chat
+print('Hi, I am Philosopher Chatbot. I can answer your questions about belief.If you want to exit, type bye!')
+
+exit_list = ['bye', 'exit', 'quit', 'goodbye', 'see you later','break']
+
+while True:
+    user_input = input()
+    if user_input.lower() in exit_list:
+        print('Bye!')
+        break
+    else:
+        if greeting_response(user_input) != None:
+            print('Philosopher Chatbot :', greeting_response(user_input))
+        else:
+            print('Philosopher Chatbot :', bot_response(user_input))
