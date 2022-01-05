@@ -1,3 +1,5 @@
+#pip install nltk
+#pip install newspaper3k
 #Import the libraries
 from newspaper import Article
 import nltk
@@ -22,6 +24,23 @@ corpus = article.text
 #Print the article
 print(corpus)
 
-#Tokenize the article
+#Tokenize the article (split the article into sentences)
 text = corpus
 sentence_list = nltk.sent_tokenize(text) #convert to list of sentences
+
+#Print the sentence list
+print(sentence_list)
+
+# A function to return a random greeting response
+def greeting_response(text):
+    text = text.lower()
+    # Bot Responses
+    bot_greetings = ['hi', 'hello', 'hey', 'hola', 'greetings', 'sup', 'what\'s up', 'hey there', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'how are you', 'how\'s it going', 'how\'s it going?']
+
+    # User Greetings
+    user_greetings = ['hi', 'hello', 'hey', 'hola', 'greetings', 'sup', 'what\'s up', 'hey there', 'hey', 'hi there', 'hello there', 'hey there', 'howdy', 'how are you', 'how\'s it going', 'how\'s it going?']
+
+    for word in text.splot():
+        if word in user_greetings:
+            return random.choice(bot_greetings) + '.'
+            
