@@ -8,3 +8,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 import warnings
 import numpy as np
 warnings.filterwarnings('ignore')
+
+#Download the punkt package
+nltk.download('punkt')
+
+#Get the article and assign it to a variable
+article = Article('https://plato.stanford.edu/entries/belief/')
+article.download()
+article.parse()
+article.nlp()
+corpus = article.text
+
+#Print the article
+print(corpus)
